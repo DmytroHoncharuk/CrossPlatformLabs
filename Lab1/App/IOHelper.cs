@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace App;
 
 public static class IOHelper
@@ -35,8 +37,8 @@ public static class IOHelper
         return numberofLevels;
     }
 
-    public static void WriteResultToFile(string AmountOfTriangles)
+    public static void WriteResultToFile(int result)
     {
-        File.WriteAllText(OutputFileName, $"{AmountOfTriangles}");
+        File.WriteAllText(OutputFileName, result.ToString(CultureInfo.InvariantCulture));
     }
 }
