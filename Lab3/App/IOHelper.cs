@@ -4,41 +4,44 @@ namespace App;
 
 public static class IOHelper
 {
-    private const string InputFileName = "INPUT.TXT";
-    private const string OutputFileName = "OUTPUT.TXT";
-
-    public static int ReadSingleNumberFromFile()
+    public static (int, List<(int, int)>) ReadGraphDataFromFile(string inputFileName = "INPUT.TXT")
     {
-        if (!File.Exists(InputFileName))
+        if (!File.Exists(inputFileName))
         {
-            throw new FileNotFoundException($"Не вдалося знайти файл: {InputFileName}.");
+            throw new FileNotFoundException($"Не вдалося знайти файл: {inputFileName}.");
         }
 
-        var lines = File.ReadAllLines(InputFileName)
-            .Select(static line => line.Trim())
-            .Where(static line => !string.IsNullOrWhiteSpace(line))
-            .ToArray();
+        var line = File.ReadAllText(inputFileName).Trim();
+        var values = line.Split(' ');
 
-        if (lines.Length == 0)
+        if (values.Length < 2)
         {
-            throw new FormatException("Файл не може бути порожнім.");
+            throw new FormatException("Файл повинен містити принаймні два числа: кількість солдат і кількість пар.");
         }
 
-        if (lines.Length != 1)
+        if (!values.All(v => int.TryParse(v, out _)))
         {
-            throw new FormatException("Файл повинен містити лише один рядок із даними.");
+            throw new FormatException("Усі вхідні дані повинні бути цілими числами.");
         }
 
-        if (!int.TryParse(lines[0], out var numberofLevels))
+        var intValues = values.Select(int.Parse).ToArray();
+
+        int n = intValues[0];
+        int m = intValues[1];
+
+        var edges = new List<(int, int)>();
+        for (int i = 0; i < m; i++)
         {
-            throw new FormatException("Дані в файлі повинні містити одне ціле число.");
+            int from = intValues[2 + 2 * i] - 1;
+            int to = intValues[3 + 2 * i] - 1;
+            edges.Add((from, to));
         }
 
-        return numberofLevels;
+        return (n, edges);
     }
 
-    public static void WriteResultToFile(int result)
+    public static void WriteResultToFile(string result, string outputFileName = "OUTPUT.TXT")
     {
-        File.WriteAllText(OutputFileName, result.ToString(CultureInfo.InvariantCulture));
+        File.WriteAllText(outputFileName, result);
     }
 }
