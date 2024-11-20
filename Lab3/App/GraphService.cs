@@ -34,7 +34,7 @@ namespace App
         {
             if (numberOfNodes < 1 || numberOfNodes > 100)
             {
-                throw new ArgumentOutOfRangeException(variableName, $"{variableName} має бути в межах 1 та 100.");
+                throw new ArgumentOutOfRangeException(variableName, $"{variableName} must be in range 1 to 100.");
             }
         }
 
@@ -42,7 +42,7 @@ namespace App
         {
             if (numberOfEdges < 1 || numberOfEdges > 5000)
             {
-                throw new ArgumentOutOfRangeException(variableName, $"{variableName} має бути в межах 1 та 5000.");
+                throw new ArgumentOutOfRangeException(variableName, $"{variableName} must be in range 1 to 5000.");
             }
         }
     }

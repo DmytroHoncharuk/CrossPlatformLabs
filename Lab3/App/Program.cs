@@ -20,7 +20,7 @@ namespace App
             catch (Exception ex)
             {
                 IOHelper.WriteResultToFile("No");
-                Console.WriteLine($"Помилка: {ex.Message}");
+                Console.WriteLine($"Error: {ex.Message}");
             }
         }
     }

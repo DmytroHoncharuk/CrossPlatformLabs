@@ -8,7 +8,7 @@ public static class IOHelper
     {
         if (!File.Exists(inputFileName))
         {
-            throw new FileNotFoundException($"Не вдалося знайти файл: {inputFileName}.");
+            throw new FileNotFoundException($"File is not found: {inputFileName}.");
         }
 
         var line = File.ReadAllText(inputFileName).Trim();
@@ -16,12 +16,12 @@ public static class IOHelper
 
         if (values.Length < 2)
         {
-            throw new FormatException("Файл повинен містити принаймні два числа: кількість солдат і кількість пар.");
+            throw new FormatException("File must contain at least two numbers: soldiers count and pairs count.");
         }
 
         if (!values.All(v => int.TryParse(v, out _)))
         {
-            throw new FormatException("Усі вхідні дані повинні бути цілими числами.");
+            throw new FormatException("All output data must be integers.");
         }
 
         var intValues = values.Select(int.Parse).ToArray();
