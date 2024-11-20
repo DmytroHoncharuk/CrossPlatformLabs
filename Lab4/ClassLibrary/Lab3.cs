@@ -24,14 +24,14 @@ public class Lab3
         catch (Exception ex)
         {
             WriteResultToFile("No", outputPath);
-            Console.WriteLine($"Помилка: {ex.Message}");
+            Console.WriteLine($"Error: {ex.Message}");
         }
     }
     private static (int, List<(int, int)>) ReadGraphDataFromFile(string inputFileName)
     {
         if (!File.Exists(inputFileName))
         {
-            throw new FileNotFoundException($"Не вдалося знайти файл: {inputFileName}.");
+            throw new FileNotFoundException($"File is not found: {inputFileName}.");
         }
 
         var line = File.ReadAllText(inputFileName).Trim();
@@ -39,12 +39,12 @@ public class Lab3
 
         if (values.Length < 2)
         {
-            throw new FormatException("Файл повинен містити принаймні два числа: кількість солдат і кількість пар.");
+            throw new FormatException("File must contain at least two numbers: soldiers count and pairs count.");
         }
 
         if (!values.All(v => int.TryParse(v, out _)))
         {
-            throw new FormatException("Усі вхідні дані повинні бути цілими числами.");
+            throw new FormatException("All output data must be integers.");
         }
 
         var intValues = values.Select(int.Parse).ToArray();
@@ -94,7 +94,7 @@ public class Lab3
     {
         if (numberOfNodes < 1 || numberOfNodes > 100)
         {
-            throw new ArgumentOutOfRangeException(variableName, $"{variableName} має бути в межах 1 та 100.");
+            throw new ArgumentOutOfRangeException(variableName, $"{variableName} must be in range of 1 to 100.");
         }
     }
 
@@ -102,7 +102,7 @@ public class Lab3
     {
         if (numberOfEdges < 1 || numberOfEdges > 5000)
         {
-            throw new ArgumentOutOfRangeException(variableName, $"{variableName} має бути в межах 1 та 5000.");
+            throw new ArgumentOutOfRangeException(variableName, $"{variableName} must be in range of 1 to 5000.");
         }
     }
     private class Graph
