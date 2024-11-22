@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace App.Controllers;
 
-public class ClientsController : Controller
+public class ClientController : Controller
 {
     private readonly AppDbContext _context;
 
-    public ClientsController(AppDbContext context)
+    public ClientController(AppDbContext context)
     {
         _context = context;
     }
@@ -19,6 +19,8 @@ public class ClientsController : Controller
     {
         var viewModel = new ClientSearchViewModel();
         return View(viewModel);
+
+
     }
 
     [HttpPost]
