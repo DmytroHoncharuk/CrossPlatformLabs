@@ -1,0 +1,33 @@
+@model IEnumerable<Staff>
+
+@{
+    ViewData["Title"] = "Staff List";
+}
+
+<div class="container mt-4">
+    <h2>Staff List</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Job Title</th>
+                <th>Date Joined</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var staff in Model)
+            {
+                <tr>
+                    <td>@staff.StaffName ?? "No Name"</td>
+                    <td>@staff.JobTitle?.JobDescription ?? "No Job Title"</td>
+                    <td>@staff.DateJoined?.ToString("yyyy-MM-dd") ?? "No Date"</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@staff.StaffId" class="btn btn-info btn-sm">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

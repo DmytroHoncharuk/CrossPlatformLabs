@@ -1,0 +1,73 @@
+@model Staff
+
+@{
+    ViewData["Title"] = "Staff Details";
+
+    var recentAppointments = (List<Appointment>)ViewData["RecentAppointments"]!;
+}
+
+<div class="container mt-4">
+    <h2>Staff Details</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">@Model.StaffName</h4>
+
+            <dl class="row">
+                <dt class="col-sm-3">Job Title</dt>
+                <dd class="col-sm-9">@Model.JobTitle.JobDescription</dd>
+
+                <dt class="col-sm-3">Staff ID</dt>
+                <dd class="col-sm-9">@Model.StaffId</dd>
+
+                <dt class="col-sm-3">Details</dt>
+                <dd class="col-sm-9">@Model.StaffDetails</dd>
+
+                <dt class="col-sm-3">Date Joined</dt>
+                <dd class="col-sm-9">@Model.DateJoined</dd>
+
+                @if (Model.DateLeft.HasValue)
+
+                {
+                    <dt class="col-sm-3">Date Left</dt>
+                    <dd class="col-sm-9">@Model.DateLeft.Value.ToShortDateString()</dd>
+                }
+            </dl>
+
+            <h5 class="mt-4">Recent Appointments</h5>
+            @if (recentAppointments != null && recentAppointments.Any())
+            {
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Appointment Date</th>
+                            <th>Client</th>
+                            <th>Hair Style</th>
+                            <th>Comments</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var appointment in recentAppointments)
+
+                        {
+                            <tr>
+                                <td>@appointment.AppointmentDate</td>
+                                <td>@appointment.Client.FirstName @appointment.Client.LastName</td>
+                                <td>@appointment.HairStyle?.HairStyleDescription</td>
+                                <td>@appointment.Client.Comments</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>No recent appointments found.</p>
+            }
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+@model ClientEntity
+
+@{
+    ViewData["Title"] = "ClientEntity Details";
+}
+
+<div class="container mt-4">
+    <h2>Client Details</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Name</dt>
+                <dd class="col-sm-9">@Model.FirstName @Model.LastName</dd>
+
+                <dt class="col-sm-3">Contact Details</dt>
+                <dd class="col-sm-9">
+                    <div>Cell Phone: @Model.CellPhone</div>
+                    <div>Home Phone: @Model.HomePhone</div>
+                    <div>Email: @Model.EmailAddress</div>
+                </dd>
+
+                <dt class="col-sm-3">Address</dt>
+                <dd class="col-sm-9">@Model.Address</dd>
+
+                <dt class="col-sm-3">Age Band</dt>
+                <dd class="col-sm-9">@Model.AgeBand?.AgeBandDescription</dd>
+
+                <dt class="col-sm-3">Gender</dt>
+                <dd class="col-sm-9">@Model.Gender?.GenderDescription</dd>
+
+                <dt class="col-sm-3">Natural Hair Color</dt>
+                <dd class="col-sm-9">@Model.NaturalHairColor</dd>
+
+                <dt class="col-sm-3">Comments</dt>
+                <dd class="col-sm-9">@Model.Comments</dd>
+
+                @if (!string.IsNullOrEmpty(Model.OtherDetails))
+
+                {
+                    <dt class="col-sm-3">Additional Details</dt>
+                    <dd class="col-sm-9">@Model.OtherDetails</dd>
+                }
+            </dl>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a asp-action="Search" class="btn btn-secondary">Back to Search</a>
+    </div>
+</div>
